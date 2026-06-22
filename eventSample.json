@@ -1,0 +1,102 @@
+[
+  {
+    "title": "Tech Innovators Conference",
+    "description": "Explore the latest trends in software engineering, AI, and cloud computing.",
+    "date": "2026-08-15T00:00:00.000Z",
+    "location": "Cairo International Convention Center",
+    "price": 1500,
+    "image": "https://picsum.photos/800/400?random=1",
+    "availableSeats": 300,
+    "category": 1
+  },
+  {
+    "title": "React & Next.js Bootcamp",
+    "description": "Intensive workshop covering React, Next.js, TypeScript, and deployment.",
+    "date": "2026-07-20T00:00:00.000Z",
+    "location": "Smart Village",
+    "price": 850,
+    "image": "https://picsum.photos/800/400?random=2",
+    "availableSeats": 80,
+    "category": 1
+  },
+  {
+    "title": "AI Summit Egypt",
+    "description": "A gathering of AI professionals discussing machine learning and LLMs.",
+    "date": "2026-09-05T00:00:00.000Z",
+    "location": "Bibliotheca Alexandrina",
+    "price": 2000,
+    "image": "https://picsum.photos/800/400?random=3",
+    "availableSeats": 250,
+    "category": 2
+  },
+  {
+    "title": "Startup Pitch Day",
+    "description": "Entrepreneurs present their startups to investors and mentors.",
+    "date": "2026-07-30T00:00:00.000Z",
+    "location": "The Greek Campus",
+    "price": 300,
+    "image": "https://picsum.photos/800/400?random=4",
+    "availableSeats": 150,
+    "category": 3
+  },
+  {
+    "title": "Cybersecurity Bootcamp",
+    "description": "Learn ethical hacking, penetration testing, and network security.",
+    "date": "2026-10-10T00:00:00.000Z",
+    "location": "New Cairo",
+    "price": 1200,
+    "image": "https://picsum.photos/800/400?random=5",
+    "availableSeats": 100,
+    "category": 4
+  },
+  {
+    "title": "Digital Marketing Expo",
+    "description": "Discover modern marketing strategies and social media growth tactics.",
+    "date": "2026-08-25T00:00:00.000Z",
+    "location": "Heliopolis",
+    "price": 500,
+    "image": "https://picsum.photos/800/400?random=6",
+    "availableSeats": 200,
+    "category": 5
+  },
+  {
+    "title": "Music Festival Night",
+    "description": "Live performances by top regional and international artists.",
+    "date": "2026-09-18T00:00:00.000Z",
+    "location": "North Coast Arena",
+    "price": 2500,
+    "image": "https://picsum.photos/800/400?random=7",
+    "availableSeats": 500,
+    "category": 6
+  },
+  {
+    "title": "Football Legends Match",
+    "description": "A charity football event featuring legendary players.",
+    "date": "2026-11-01T00:00:00.000Z",
+    "location": "Cairo International Stadium",
+    "price": 750,
+    "image": "https://picsum.photos/800/400?random=8",
+    "availableSeats": 1000,
+    "category": 7
+  },
+  {
+    "title": "Design Thinking Workshop",
+    "description": "Interactive workshop focused on creativity and innovation.",
+    "date": "2026-07-12T00:00:00.000Z",
+    "location": "Alexandria Business Center",
+    "price": 600,
+    "image": "https://picsum.photos/800/400?random=9",
+    "availableSeats": 60,
+    "category": 8
+  },
+  {
+    "title": "Cloud Computing Expo",
+    "description": "Deep dive into AWS, Azure, Docker, and Kubernetes.",
+    "date": "2026-10-22T00:00:00.000Z",
+    "location": "Smart Village",
+    "price": 1000,
+    "image": "https://picsum.photos/800/400?random=10",
+    "availableSeats": 180,
+    "category": 9
+  }
+]
