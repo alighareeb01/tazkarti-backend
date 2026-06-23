@@ -42,7 +42,7 @@ export const getAllEvents = catchAsync(async (req, res, next) => {
 });
 
 export const getEvent = catchAsync(async (req, res, next) => {
-  console.log(req.params);
+  // console.log(req.params);
 
   const event = await Event.findById(req.params.id);
 

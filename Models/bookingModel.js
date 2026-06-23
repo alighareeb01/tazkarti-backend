@@ -10,10 +10,17 @@ const bookingSchema = new mongoose.Schema({
     ref: "Event",
     required: true,
   },
-  status: {
-    type: String,
-    enum: ["booked", "notBooked"],
+  seats: {
+    type: Number,
+    required: true,
+    min: 1,
   },
 });
+
+bookingSchema.pre(/^find/, function (next) {
+  this.populate("user").populate("event");
+  next();
+});
+
 
 export const Booking = mongoose.model("Booking", bookingSchema);
