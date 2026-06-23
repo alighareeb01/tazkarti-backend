@@ -4,14 +4,14 @@ import dotenv from "dotenv";
 dotenv.config({ path: "./config.env" });
 
 export const sendEmail = async (options) => {
-  const transport = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 587,
-    auth: {
-      user: process.env.MAILTRAP_USER,
-      pass: process.env.MAILTRAP_PASSWORD,
-    },
-  });
+const transport = nodemailer.createTransport({
+  host: "smtp.sendgrid.net",
+  port: 587,
+  auth: {
+    user: "apikey",
+    pass: process.env.SENDGRID_PASSWORD,
+  },
+});
 
   const mailOptions = {
     from: `aly adbullkareem <${process.env.MAILTRAP_FROM}>`,

@@ -22,24 +22,27 @@ export const signup = catchAsync(async (req, res, next) => {
   });
 
   //sendEmail
-  const verifyToken = jwt.sign(
-    { id: newUser._id },
-    process.env.JWT_SECRET_KEY,
-    {
-      expiresIn: "10min",
-    },
-  );
-  await sendEmail({
-    email: newUser.email,
-    subject: "Verify your account",
-    message: `Please Click this button to verify your account:
-    
-     <button><a href=${req.protocol}://${req.get("host")}/api/users/verify-account/${verifyToken}> click to verify </a></button>
-    `,
-  });
+  const verifyToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY);
+
+  try {
+    await sendEmail({
+      email: newUser.email,
+      subject: "Verify your account",
+      message: `
+  <h2>Verify your account</h2>
+  <p>Click the link below:</p>
+  <a href="${req.protocol}://${req.get("host")}/api/users/verify-account/${verifyToken}">
+    Verify Account
+  </a>
+`,
+    });
+  } catch (error) {
+    console.log("error from Email", error);
+  }
 
   res.status(201).json({
     status: "success",
+    message: "PLEASE VERIFY YOUR ACCOUNT SO YOU CAN LOGIN",
     data: {
       newUser,
     },
@@ -53,6 +56,11 @@ export const login = catchAsync(async (req, res, next) => {
     return next(new appError(`please enter email or password`, 401));
 
   const user = await User.findOne({ email }).select("+password");
+
+  if (!user.isVerified)
+    return next(
+      new appError(`please verify your account so you can log in`, 400),
+    );
 
   if (!user || !(await user.comparePassowrds(password, user.password))) {
     return next(new appError(`Incorrect email or password`, 401));
