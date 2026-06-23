@@ -8,13 +8,13 @@ import cors from "cors";
 
 const app = express();
 
-app.use(express.json({ limit: "10kb" }));
-
 const corsOptions = {
   origin: [`http://localhost:3000`, "http://localhost:5173"],
 };
 
 app.use(cors(corsOptions));
+
+app.use(express.json({ limit: "10kb" }));
 
 app.use("/api/users", userRouter);
 app.use("/api/events", eventRouter);
