@@ -25,19 +25,17 @@ export const signup = catchAsync(async (req, res, next) => {
   const verifyToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY);
 
   
-    sendEmail({
-      email: newUser.email,
-      subject: "Verify your account",
-      message: `
+   await sendEmail({
+     email: newUser.email,
+     subject: "Verify your account",
+     message: `
   <h2>Verify your account</h2>
   <p>Click the link below:</p>
   <a href="${req.protocol}://${req.get("host")}/api/users/verify-account/${verifyToken}">
     Verify Account
   </a>
 `,
-    }).catch((err) => {
-      console.log("EMAIL ERROR", err.message);
-    });
+   });
   
 
   newUser.password = undefined;
