@@ -30,8 +30,12 @@ export const signup = catchAsync(async (req, res, next) => {
      email: newUser.email,
      subject: "Verify your account",
      message: `
-      <h2>Verify your account</h2>
-    `,
+<h2>Verify your account</h2>
+
+<a href="${req.protocol}://${req.get("host")}/api/users/verify-account/${verifyToken}">
+Verify Account
+</a>
+`,
    });
 
     console.log("EMAIL SENT");
