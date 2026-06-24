@@ -5,17 +5,17 @@ dotenv.config({ path: "./config.env" });
 
 export const sendEmail = async (options) => {
   const transport = nodemailer.createTransport({
-    service: "gmail",
+    service: "SendGrid",
     auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_APP_PASSWORD,
+      user: "apikey",
+      pass: process.env.SENDGRID_PASSWORD,
     },
     connectionTimeout: 10000,
     socketTimeout: 10000,
   });
 
   const mailOptions = {
-    from: `Aly Abdullkareem <${process.env.GMAIL_USER}>`,
+    from: `Aly Abdullkareem <${process.env.MAILTRAP_FROM}>`,
     to: options.email,
     subject: options.subject,
     html: options.message,
