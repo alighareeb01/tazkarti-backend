@@ -40,6 +40,8 @@ export const signup = catchAsync(async (req, res, next) => {
     });
   
 
+  newUser.password = undefined;
+  
   res.status(201).json({
     status: "success",
     message: "PLEASE VERIFY YOUR ACCOUNT SO YOU CAN LOGIN",
