@@ -4,6 +4,10 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: "./config.env" });
 
+if (!process.env.DATABASE) {
+  throw new Error("DATABASE env variable is missing");
+}
+
 mongoose
   .connect(process.env.DATABASE)
   .then(() => {
@@ -20,3 +24,5 @@ mongoose.connection.once("open", () => {
 // app.listen(process.env.PORT, () => {
 //   console.log(`app running on port ${process.env.PORT}`);
 // });
+
+export default app;
