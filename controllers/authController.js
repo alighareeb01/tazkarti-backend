@@ -24,8 +24,8 @@ export const signup = catchAsync(async (req, res, next) => {
   //sendEmail
   const verifyToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY);
 
-  try {
-    await sendEmail({
+  
+    sendEmail({
       email: newUser.email,
       subject: "Verify your account",
       message: `
@@ -35,10 +35,10 @@ export const signup = catchAsync(async (req, res, next) => {
     Verify Account
   </a>
 `,
+    }).catch((err) => {
+      console.log("EMAIL ERROR", err.message);
     });
-  } catch (error) {
-    console.log("error from Email", error);
-  }
+  
 
   res.status(201).json({
     status: "success",
