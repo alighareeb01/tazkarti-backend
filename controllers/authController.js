@@ -26,13 +26,13 @@ export const signup = catchAsync(async (req, res, next) => {
 
   
   try {
-    sendEmail({
-      email: newUser.email,
-      subject: "Verify your account",
-      message: `
+   await sendEmail({
+     email: newUser.email,
+     subject: "Verify your account",
+     message: `
       <h2>Verify your account</h2>
     `,
-    });
+   });
 
     console.log("EMAIL SENT");
   } catch (err) {
