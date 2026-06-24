@@ -8,9 +8,12 @@ import { protect, restrictTo } from "../controllers/authController.js";
 
 const router = express.Router();
 
-router.use(protect, restrictTo("user"));
 
-router.route("/").post(createBooking).get(getMyBookings);
-router.route("/:id").delete(cancelBooking);
+
+router
+  .route("/")
+  .post(protect, restrictTo("user"), createBooking)
+  .get(getMyBookings);
+router.route("/:id").delete(protect, restrictTo("admin"), cancelBooking);
 
 export default router;
