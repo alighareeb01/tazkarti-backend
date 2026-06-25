@@ -9,7 +9,7 @@ import { protect, restrictTo } from "../controllers/authController.js";
 const router = express.Router();
 
 
-
+// asd
 router
   .route("/")
   .post(protect, restrictTo("user"), createBooking)
