@@ -24,19 +24,18 @@ export const signup = catchAsync(async (req, res, next) => {
   //sendEmail
   const verifyToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY);
 
-  
   try {
-   await sendEmail({
-     email: newUser.email,
-     subject: "Verify your account",
-     message: `
+    await sendEmail({
+      email: newUser.email,
+      subject: "Verify your account",
+      message: `
 <h2>Verify your account</h2>
 
 <a href="${req.protocol}://${req.get("host")}/api/users/verify-account/${verifyToken}">
 Verify Account
 </a>
 `,
-   });
+    });
 
     console.log("EMAIL SENT");
   } catch (err) {
@@ -44,7 +43,7 @@ Verify Account
   }
 
   newUser.password = undefined;
-  
+
   res.status(201).json({
     status: "success",
     message: "PLEASE VERIFY YOUR ACCOUNT SO YOU CAN LOGIN",
@@ -133,6 +132,9 @@ export const forgetPassword = catchAsync(async (req, res, next) => {
     .update(resetToken)
     .digest("hex");
 
+  // console.log("resetToken:", resetToken);
+  // console.log("tokenHashed:", tokenHashed);
+
   await client.set(`passwordResetToken:${tokenHashed}`, `${user._id}`, {
     EX: 60 * 10,
   });
@@ -143,7 +145,7 @@ export const forgetPassword = catchAsync(async (req, res, next) => {
     subject: "your reset token",
     message: `Please go to :
     
-     <${req.protocol}://${req.get("host")}/api/users/reset-password/${resetToken}> TO RESET YOUR PASSWORD
+     ${req.protocol}://${req.get("host")}/api/users/reset-password/${resetToken}  TO RESET YOUR PASSWORD
     `,
   });
 
