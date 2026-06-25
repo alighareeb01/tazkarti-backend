@@ -21,5 +21,8 @@ mongoose.connection.once("open", () => {
   console.log("CONNETED TO ", mongoose.connection.name);
 });
 
+// app.listen(3000, () => {
+//   console.log("d");
+// });
 
 export default app;
