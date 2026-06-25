@@ -14,6 +14,6 @@ router
   .route("/")
   .post(protect, restrictTo("user"), createBooking)
   .get(getMyBookings);
-router.route("/:id").delete(protect, restrictTo("admin"), cancelBooking);
+router.route("/:id").delete(protect, restrictTo("user"), cancelBooking);
 
 export default router;
