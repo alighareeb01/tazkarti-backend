@@ -145,8 +145,9 @@ export const forgetPassword = catchAsync(async (req, res, next) => {
     subject: "your reset token",
     message: `Please go to :
     
-     ${req.protocol}://${req.get("host")}/api/users/reset-password/${resetToken}  TO RESET YOUR PASSWORD
-    `,
+     https://tazkarti-front.vercel.app/reset-password/${resetToken}  TO RESET YOUR PASSWORD
+     `,
+    //  ${req.protocol}://${req.get("host")}/api/users/reset-password/${resetToken}  TO RESET YOUR PASSWORD
   });
 
   res.status(200).json({
