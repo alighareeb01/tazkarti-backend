@@ -9,7 +9,11 @@ import cors from "cors";
 const app = express();
 
 const corsOptions = {
-  origin: [`http://localhost:3000`, "http://localhost:5173"],
+  origin: [
+    `http://localhost:3000`,
+    "http://localhost:5173",
+    "https://tazkart-front.vercel.app",
+  ],
 };
 
 app.use(cors(corsOptions));
