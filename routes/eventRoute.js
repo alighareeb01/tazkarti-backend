@@ -4,6 +4,7 @@ import {
   getEvent,
   createEvent,
   deleteEvent,
+  uploadPhoto,
 } from "../controllers/eventController.js";
 import { protect, restrictTo } from "../controllers/authController.js";
 
@@ -12,7 +13,7 @@ const router = express.Router();
 router
   .route("/")
   .get(getAllEvents)
-  .post(protect, restrictTo("admin"), createEvent);
+  .post(protect, restrictTo("admin"), uploadPhoto, createEvent);
 
 router
   .route("/:id")

@@ -1,5 +1,12 @@
+import multer from "multer";
 import { Event } from "../Models/eventModel.js";
 import { catchAsync } from "../utils/catchAsync.js";
+import path from "path";
+import { fileURLToPath } from "url";
+import { appError } from "../utils/appError.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const getAllEvents = catchAsync(async (req, res, next) => {
   let queryObj = { ...req.query };
@@ -58,8 +65,34 @@ export const getEvent = catchAsync(async (req, res, next) => {
   });
 });
 
+// multer
+const multerStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../public/imgs"));
+  },
+  filename: function (req, file, cb) {
+    const ext = file.mimetype.split("/")[1];
+    cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
+  },
+});
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(new appError("please upload an image", 401), false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+export const uploadPhoto = upload.single("image");
 export const createEvent = catchAsync(async (req, res, next) => {
-  const newEvent = await Event.create({
+  // console.log(req.body);
+  const newEventObj = {
     title: req.body.title,
     description: req.body.description,
     date: req.body.date,
@@ -67,7 +100,13 @@ export const createEvent = catchAsync(async (req, res, next) => {
     availableSeats: req.body.availableSeats,
     category: req.body.category,
     location: req.body.location,
-  });
+  };
+  if (req.file) {
+    newEventObj.image = req.file.filename;
+  }
+
+  const newEvent = await Event.create(newEventObj);
+  // console.log(req.file);
 
   res.status(200).json({ status: "success", newEvent });
 });
