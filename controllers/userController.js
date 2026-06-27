@@ -1,4 +1,5 @@
 import { Booking } from "../Models/bookingModel.js";
+import { Event } from "../Models/eventModel.js";
 import User from "../Models/userModel.js";
 import { appError } from "../utils/appError.js";
 import { catchAsync } from "../utils/catchAsync.js";
@@ -47,4 +48,17 @@ export const updateMe = catchAsync(async (req, res, next) => {
   );
 
   res.status(200).json({ status: "success", updatedUser: user });
+});
+
+export const getStats = catchAsync(async (req, res, next) => {
+  const users = await User.countDocuments();
+
+  const events = await Event.countDocuments();
+
+  const bookings = await Booking.countDocuments();
+
+  res.status(200).json({
+    status: "success",
+    data: { users, events, bookings },
+  });
 });

@@ -14,6 +14,7 @@ import {
   getMe,
   getMyBookings,
   updateMe,
+  getStats,
 } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -32,5 +33,7 @@ router
 router.route("/my-bookings").get(protect, restrictTo("user"), getMyBookings);
 
 router.route("/try/:id").get(tryy);
+
+router.route("/stats").get(protect, restrictTo("admin"), getStats);
 
 export default router;
