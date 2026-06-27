@@ -16,8 +16,6 @@ router
   .get(getMyBookings);
 router.route("/:id").delete(protect, restrictTo("user"), cancelBooking);
 
-router
-  .route("/most-bookings")
-  .get(protect, restrictTo("admin"), getMostBooking);
+router.route("/most-bookings").get(getMostBooking);
 
 export default router;
