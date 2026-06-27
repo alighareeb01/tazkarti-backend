@@ -71,3 +71,38 @@ export const cancelBooking = catchAsync(async (req, res, next) => {
     message: "canceled successfully",
   });
 });
+
+
+export const getMostBooking = catchAsync(async (req, res, next) => {
+  const stats = await Booking.aggregate([
+    {
+      $group: {
+        _id: "$event",
+        totalBookings: {
+          $sum: 1,
+        },
+      },
+    },
+    {
+      $sort: {
+        totalBookings: -1,
+      },
+    },
+    {
+      $lookup: {
+        from: "events",
+        localField: "_id",
+        foreignField: "_id",
+        as: "event",
+      },
+    },
+    {
+      $unwind: "$event",
+    },
+  ]);
+
+  res.status(200).json({
+    status: "success",
+    data: stats,
+  });
+});

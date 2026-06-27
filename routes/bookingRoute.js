@@ -3,11 +3,11 @@ import {
   cancelBooking,
   createBooking,
   getMyBookings,
+  getMostBooking,
 } from "../controllers/bookingController.js";
 import { protect, restrictTo } from "../controllers/authController.js";
 
 const router = express.Router();
-
 
 // asd
 router
@@ -15,5 +15,9 @@ router
   .post(protect, restrictTo("user"), createBooking)
   .get(getMyBookings);
 router.route("/:id").delete(protect, restrictTo("user"), cancelBooking);
+
+router
+  .route("/most-bookings")
+  .get(protect, restrictTo("admin"), getMostBooking);
 
 export default router;
