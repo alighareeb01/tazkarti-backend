@@ -22,8 +22,8 @@ mongoose.connection.once("open", () => {
 });
 
 //refresh
-// app.listen(3000, () => {
-//   console.log("d");
-// });
+app.listen(3000, () => {
+  console.log("d");
+});
 
 export default app;

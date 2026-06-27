@@ -66,15 +66,17 @@ export const getEvent = catchAsync(async (req, res, next) => {
 });
 
 // multer
-const multerStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/imgs"));
-  },
-  filename: function (req, file, cb) {
-    const ext = file.mimetype.split("/")[1];
-    cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
-  },
-});
+// const multerStorage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, path.join(__dirname, "../public/imgs"));
+//   },
+//   filename: function (req, file, cb) {
+//     const ext = file.mimetype.split("/")[1];
+//     cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
+//   },
+// });
+
+const multerStorage = multer.memoryStorage()
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith("image")) {
@@ -101,9 +103,18 @@ export const createEvent = catchAsync(async (req, res, next) => {
     category: req.body.category,
     location: req.body.location,
   };
-  if (req.file) {
-    newEventObj.image = req.file.filename;
-  }
+
+   if (req.file) {
+     const result = await cloudinary.uploader.upload(
+       `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`,
+       {
+         folder: "events",
+       },
+     );
+
+     newEventObj.image = result.secure_url;
+   }
+
 
   const newEvent = await Event.create(newEventObj);
   // console.log(req.file);
